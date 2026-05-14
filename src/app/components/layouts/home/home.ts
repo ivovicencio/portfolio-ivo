@@ -24,6 +24,10 @@ export class HomeComponent {
   isSkillOpen = false;
   selectedTech: TechItem | null = null;
   orbitRadius = 420;
+  tiltAngle = 75;
+  isDragging = false;
+  dragStartX = 0;
+  dragStartRotation = 0;
 
   constructor() {
     this.updateOrbitRadius();
@@ -32,10 +36,49 @@ export class HomeComponent {
   @HostListener('window:resize')
   updateOrbitRadius() {
     const w = window.innerWidth;
-    if (w <= 480) this.orbitRadius = 130;
-    else if (w <= 767) this.orbitRadius = 170;
-    else if (w <= 991) this.orbitRadius = 240;
-    else this.orbitRadius = 420;
+    if (w <= 480) {
+      this.orbitRadius = 150;
+      this.tiltAngle = 55;
+    } else if (w <= 767) {
+      this.orbitRadius = 200;
+      this.tiltAngle = 62;
+    } else if (w <= 991) {
+      this.orbitRadius = 260;
+      this.tiltAngle = 70;
+    } else {
+      this.orbitRadius = 420;
+      this.tiltAngle = 75;
+    }
+  }
+
+  startDrag(event: MouseEvent | TouchEvent) {
+    this.isDragging = true;
+    const clientX = 'touches' in event ? event.touches[0].clientX : event.clientX;
+    this.dragStartX = clientX;
+    this.dragStartRotation = this.systemRotation;
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  onMouseDrag(event: MouseEvent) {
+    if (!this.isDragging) return;
+    this.systemRotation = this.dragStartRotation + (event.clientX - this.dragStartX) * 0.5;
+  }
+
+  @HostListener('document:mouseup')
+  endMouseDrag() {
+    this.isDragging = false;
+  }
+
+  @HostListener('document:touchmove', ['$event'])
+  onTouchDrag(event: TouchEvent) {
+    if (!this.isDragging) return;
+    this.systemRotation =
+      this.dragStartRotation + (event.touches[0].clientX - this.dragStartX) * 0.5;
+  }
+
+  @HostListener('document:touchend')
+  endTouchDrag() {
+    this.isDragging = false;
   }
 
   technologies: TechItem[] = [

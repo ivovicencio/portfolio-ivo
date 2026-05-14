@@ -20,7 +20,10 @@
 
     <div
       class="OrbitalRing"
-      [style.transform]="'rotateX(75deg) rotateZ(' + systemRotation + 'deg)'"
+      [class.is-grabbing]="isDragging"
+      (mousedown)="startDrag($event)"
+      (touchstart)="startDrag($event)"
+      [style.transform]="'rotateX(' + tiltAngle + 'deg) rotateZ(' + systemRotation + 'deg)'"
     >
       <div
         *ngFor="let tech of technologies; let i = index"
@@ -33,9 +36,13 @@
           orbitRadius +
           'px) rotateZ(' +
           (-tech.angle - systemRotation) +
-          'deg) rotateX(-75deg)'
+          'deg) rotateX(-' +
+          tiltAngle +
+          'deg)'
         "
         (click)="selectTech(i); $event.stopPropagation()"
+        (mousedown)="$event.stopPropagation()"
+        (touchstart)="$event.stopPropagation()"
       >
         <div class="IconInner">
           <img [src]="tech.logo" [alt]="tech.name" />
