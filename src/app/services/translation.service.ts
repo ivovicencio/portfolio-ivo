@@ -52,6 +52,36 @@ export class TranslationService {
     'home.subtitle': { es: 'FULL STACK DEVELOPER', en: 'FULL STACK DEVELOPER' },
     'home.location': { es: 'JUJUY & NEUQUÉN, ARGENTINA', en: 'JUJUY & NEUQUÉN, ARGENTINA' },
 
+    /* Tech descriptions */
+    'tech.angular': {
+      es: 'Desarrollo de aplicaciones modulares con arquitectura basada en componentes, servicios y state management.',
+      en: 'Modular application development with component-based architecture, services, and state management.',
+    },
+    'tech.react': {
+      es: 'Creación de interfaces dinámicas con componentes funcionales, hooks y manejo de estado.',
+      en: 'Dynamic interface development with functional components, hooks, and state management.',
+    },
+    'tech.nodejs': {
+      es: 'Desarrollo de APIs REST y servicios backend en el ecosistema Node.js.',
+      en: 'REST API development and backend services within the Node.js ecosystem.',
+    },
+    'tech.java': {
+      es: 'Conocimientos fundamentales de programación orientada a objetos y sintaxis del lenguaje.',
+      en: 'Fundamental knowledge of object-oriented programming and language syntax.',
+    },
+    'tech.javascript': {
+      es: 'Manejo del núcleo del lenguaje, manipulación del DOM y lógica asíncrona.',
+      en: 'Core language proficiency, DOM manipulation, and asynchronous logic.',
+    },
+    'tech.docker': {
+      es: 'Contenerización de aplicaciones, clustering, tuning y despliegue en entornos productivos.',
+      en: 'Application containerization, clustering, tuning, and production deployment.',
+    },
+    'tech.linux': {
+      es: 'Administración de servicios, gestión del sistema y uso avanzado del entorno Linux.',
+      en: 'Service administration, system management, and advanced Linux environment usage.',
+    },
+
     /* Projects */
     'projects.title': { es: 'PROYECTOS_', en: 'PROJECTS_' },
     'projects.subtitle': { es: 'FILTRAR POR CATEGORÍA', en: 'FILTER BY CATEGORY' },

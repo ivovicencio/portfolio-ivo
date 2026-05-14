@@ -6,8 +6,8 @@ interface TechItem {
   name: string;
   logo: string;
   angle: number;
-  level: number; // Porcentaje de maestría
-  description: string; // Breve info de la habilidad
+  level: number;
+  descKey: string;
 }
 
 @Component({
@@ -43,50 +43,50 @@ export class HomeComponent {
       name: 'Angular',
       logo: 'assets/angular-logo.png',
       angle: 0,
-      level: 90,
-      description: 'Maestría en arquitectura de componentes y estado complejo.',
+      level: 70,
+      descKey: 'angular',
     },
     {
       name: 'React',
       logo: 'assets/react-logo.png',
       angle: 51,
-      level: 75,
-      description: 'Desarrollo de interfaces reactivas y hooks personalizados.',
+      level: 40,
+      descKey: 'react',
     },
     {
       name: 'Node.js',
       logo: 'assets/nodejs-logo.png',
       angle: 103,
-      level: 80,
-      description: 'Construcción de APIs escalables y microservicios.',
+      level: 30,
+      descKey: 'nodejs',
     },
     {
       name: 'Java',
       logo: 'assets/java-logo.png',
       angle: 154,
-      level: 85,
-      description: 'Dominio de POO y frameworks robustos como Spring.',
+      level: 20,
+      descKey: 'java',
     },
     {
       name: 'JavaScript',
       logo: 'assets/js-logo.png',
       angle: 206,
-      level: 95,
-      description: 'Conocimiento profundo del núcleo del lenguaje y ES6+.',
+      level: 30,
+      descKey: 'javascript',
     },
     {
       name: 'Docker',
       logo: 'assets/docker-logo.png',
       angle: 257,
-      level: 70,
-      description: 'Contenerización y despliegue de entornos aislados.',
+      level: 60,
+      descKey: 'docker',
     },
     {
       name: 'Linux',
       logo: 'assets/linux-logo.png',
       angle: 309,
-      level: 85,
-      description: 'Administración de sistemas y optimización vía terminal.',
+      level: 50,
+      descKey: 'linux',
     },
   ];
 
@@ -114,10 +114,10 @@ export class HomeComponent {
 
   downloadCV(lang: string) {
     const fileMap: Record<string, string> = {
-      es: 'CV_IVO_VICENCIO_ES.pdf',
-      en: 'CV_IVO_VICENCIO_EN.pdf',
+      es: 'CV_IVOVICENCIO_ES_2026.pdf',
+      en: 'CV_IVOVICENCIO_EN_2026.pdf',
     };
-    const filename = fileMap[lang] || 'CV_IVO_VICENCIO.pdf';
+    const filename = fileMap[lang] || 'CV_IVOVICENCIO.pdf';
     const link = document.createElement('a');
     link.href = `assets/${filename}`;
     link.download = filename;

@@ -104,7 +104,7 @@
       <div class="SkillContent" *ngIf="selectedTech">
         <img [src]="selectedTech.logo" class="SkillIcon" />
         <h3 class="SkillTitle">{{ selectedTech.name }}</h3>
-        <p class="SkillDesc">{{ selectedTech.description }}</p>
+        <p class="SkillDesc">{{ 'tech.' + selectedTech.descKey | translate }}</p>
         <div class="MasteryContainer">
           <span>{{ 'home.mastery' | translate }} {{ selectedTech.level }}%</span>
           <div class="MasteryBar">
