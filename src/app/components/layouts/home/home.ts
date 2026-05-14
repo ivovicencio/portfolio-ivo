@@ -25,9 +25,12 @@ export class HomeComponent {
   selectedTech: TechItem | null = null;
   orbitRadius = 420;
   tiltAngle = 75;
-  isDragging = false;
+  isGrabbing = false;
+  isMomentuming = false;
   dragStartX = 0;
   dragStartRotation = 0;
+  momentumVelocity = 0;
+  momentumRaf: number | null = null;
 
   constructor() {
     this.updateOrbitRadius();
@@ -52,7 +55,13 @@ export class HomeComponent {
   }
 
   startDrag(event: MouseEvent | TouchEvent) {
-    this.isDragging = true;
+    if (this.momentumRaf !== null) {
+      cancelAnimationFrame(this.momentumRaf);
+      this.momentumRaf = null;
+    }
+    this.isGrabbing = true;
+    this.isMomentuming = false;
+    this.momentumVelocity = 0;
     const clientX = 'touches' in event ? event.touches[0].clientX : event.clientX;
     this.dragStartX = clientX;
     this.dragStartRotation = this.systemRotation;
@@ -60,25 +69,53 @@ export class HomeComponent {
 
   @HostListener('document:mousemove', ['$event'])
   onMouseDrag(event: MouseEvent) {
-    if (!this.isDragging) return;
-    this.systemRotation = this.dragStartRotation + (event.clientX - this.dragStartX) * 0.5;
+    if (!this.isGrabbing) return;
+    const prev = this.systemRotation;
+    this.systemRotation = this.dragStartRotation - (event.clientX - this.dragStartX) * 0.5;
+    this.momentumVelocity = this.systemRotation - prev;
   }
 
   @HostListener('document:mouseup')
   endMouseDrag() {
-    this.isDragging = false;
+    if (!this.isGrabbing) return;
+    this.isGrabbing = false;
+    this.startMomentum();
   }
 
   @HostListener('document:touchmove', ['$event'])
   onTouchDrag(event: TouchEvent) {
-    if (!this.isDragging) return;
+    if (!this.isGrabbing) return;
+    const prev = this.systemRotation;
     this.systemRotation =
-      this.dragStartRotation + (event.touches[0].clientX - this.dragStartX) * 0.5;
+      this.dragStartRotation - (event.touches[0].clientX - this.dragStartX) * 0.5;
+    this.momentumVelocity = this.systemRotation - prev;
   }
 
   @HostListener('document:touchend')
   endTouchDrag() {
-    this.isDragging = false;
+    if (!this.isGrabbing) return;
+    this.isGrabbing = false;
+    this.startMomentum();
+  }
+
+  private startMomentum() {
+    const absV = Math.abs(this.momentumVelocity);
+    if (absV < 0.3) return;
+
+    this.isMomentuming = true;
+
+    const step = () => {
+      this.systemRotation += this.momentumVelocity;
+      this.momentumVelocity *= 0.97;
+      if (Math.abs(this.momentumVelocity) > 0.05) {
+        this.momentumRaf = requestAnimationFrame(step);
+      } else {
+        this.isMomentuming = false;
+        this.momentumRaf = null;
+      }
+    };
+
+    this.momentumRaf = requestAnimationFrame(step);
   }
 
   technologies: TechItem[] = [

@@ -247,12 +247,17 @@
   touch-action: none;
 }
 
-.OrbitalRing.is-grabbing {
-  cursor: grabbing;
+.OrbitalRing.is-grabbing,
+.OrbitalRing.is-momentuming {
   transition: none !important;
 }
 
-.OrbitalRing.is-grabbing .PlanetaryIcon {
+.OrbitalRing.is-grabbing {
+  cursor: grabbing;
+}
+
+.OrbitalRing.is-grabbing .PlanetaryIcon,
+.OrbitalRing.is-momentuming .PlanetaryIcon {
   transition: none !important;
 }
 

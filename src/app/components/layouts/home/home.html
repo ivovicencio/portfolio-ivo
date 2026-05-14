@@ -20,7 +20,8 @@
 
     <div
       class="OrbitalRing"
-      [class.is-grabbing]="isDragging"
+      [class.is-grabbing]="isGrabbing"
+      [class.is-momentuming]="isMomentuming"
       (mousedown)="startDrag($event)"
       (touchstart)="startDrag($event)"
       [style.transform]="'rotateX(' + tiltAngle + 'deg) rotateZ(' + systemRotation + 'deg)'"
