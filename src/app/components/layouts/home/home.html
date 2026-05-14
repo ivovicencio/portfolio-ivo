@@ -1,0 +1,124 @@
+<section class="HeroGalaxyContainer">
+  <div class="NebulaSmoke"></div>
+  <div class="StarsBackground"></div>
+
+  <div class="SolarSystem">
+    <div class="CentralCore" (click)="toggleProfile()">
+      <div class="TechBadge">
+        <div class="BadgeScanLine"></div>
+        <span class="BadgeText">STATS</span>
+        <span class="BadgeBracketLeft">[</span>
+        <span class="BadgeBracketRight">]</span>
+        <div class="BadgeArrow arrowLeft"></div>
+        <div class="BadgeArrow arrowRight"></div>
+      </div>
+      <div class="ImageMask">
+        <img src="assets/hero-center.png" alt="Ivo Vicencio" class="AvatarImage" />
+      </div>
+      <div class="CoreGlow"></div>
+    </div>
+
+    <div
+      class="OrbitalRing"
+      [style.transform]="'rotateX(75deg) rotateZ(' + systemRotation + 'deg)'"
+    >
+      <div
+        *ngFor="let tech of technologies; let i = index"
+        class="PlanetaryIcon"
+        [class.SelectedTech]="i === selectedTechIndex"
+        [style.transform]="
+          'rotateZ(' +
+          tech.angle +
+          'deg) translateX(' +
+          orbitRadius +
+          'px) rotateZ(' +
+          (-tech.angle - systemRotation) +
+          'deg) rotateX(-75deg)'
+        "
+        (click)="selectTech(i); $event.stopPropagation()"
+      >
+        <div class="IconInner">
+          <img [src]="tech.logo" [alt]="tech.name" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="StatusOverlay" *ngIf="isProfileOpen" (click)="toggleProfile()">
+    <div class="StatusWindow" (click)="$event.stopPropagation()">
+      <div class="WindowHeader">{{ 'home.windowHeader' | translate }}</div>
+
+      <div class="InfoRow">
+        <span class="Label">{{ 'home.nameLabel' | translate }}</span>
+        <span class="Value">{{ 'home.nameValue' | translate }}</span>
+      </div>
+      <div class="InfoRow">
+        <span class="Label">{{ 'home.jobLabel' | translate }}</span>
+        <span class="Value">{{ 'home.jobValue' | translate }}</span>
+      </div>
+      <div class="InfoRow">
+        <span class="Label">{{ 'home.titleLabel' | translate }}</span>
+        <span class="Value">{{ 'home.titleValue' | translate }}</span>
+      </div>
+      <div class="InfoRow">
+        <span class="Label">{{ 'home.levelLabel' | translate }}</span>
+        <span class="Value">{{ 'home.levelValue' | translate }}</span>
+      </div>
+
+      <div class="StatsDivider">{{ 'home.softSkills' | translate }}</div>
+      <div class="SoftSkillsGrid">
+        <div class="SkillBar">
+          <p>{{ 'home.skill1' | translate }}</p>
+          <div class="Bar"><div class="Fill" style="width: 90%"></div></div>
+        </div>
+        <div class="SkillBar">
+          <p>{{ 'home.skill2' | translate }}</p>
+          <div class="Bar"><div class="Fill" style="width: 95%"></div></div>
+        </div>
+        <div class="SkillBar">
+          <p>{{ 'home.skill3' | translate }}</p>
+          <div class="Bar"><div class="Fill" style="width: 100%"></div></div>
+        </div>
+        <div class="SkillBar">
+          <p>{{ 'home.skill4' | translate }}</p>
+          <div class="Bar"><div class="Fill" style="width: 85%"></div></div>
+        </div>
+      </div>
+
+      <div class="OriginData">{{ 'home.origin' | translate }}</div>
+
+      <div class="CvButtons">
+        <button class="StatusBtn" (click)="downloadCV('es')">
+          {{ 'home.downloadEs' | translate }}
+        </button>
+        <button class="StatusBtn" (click)="downloadCV('en')">
+          {{ 'home.downloadEn' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="SkillCardOverlay" *ngIf="isSkillOpen" (click)="closeSkill()">
+    <div class="SkillCard" (click)="$event.stopPropagation()">
+      <div class="SkillHeader">{{ 'home.skillHeader' | translate }}</div>
+      <div class="SkillContent" *ngIf="selectedTech">
+        <img [src]="selectedTech.logo" class="SkillIcon" />
+        <h3 class="SkillTitle">{{ selectedTech.name }}</h3>
+        <p class="SkillDesc">{{ selectedTech.description }}</p>
+        <div class="MasteryContainer">
+          <span>{{ 'home.mastery' | translate }} {{ selectedTech.level }}%</span>
+          <div class="MasteryBar">
+            <div class="Fill" [style.width.%]="selectedTech.level"></div>
+          </div>
+        </div>
+      </div>
+      <button class="CloseSkill" (click)="closeSkill()">{{ 'home.close' | translate }}</button>
+    </div>
+  </div>
+
+  <div class="HeroTextMinimal" *ngIf="!isProfileOpen && !isSkillOpen">
+    <h1 class="TitleMinimal">{{ 'home.title' | translate }}</h1>
+    <h2 class="SubtitleMinimal">{{ 'home.subtitle' | translate }}</h2>
+    <p class="LocationMinimal">{{ 'home.location' | translate }}</p>
+  </div>
+</section>

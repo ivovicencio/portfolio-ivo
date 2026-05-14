@@ -1,0 +1,133 @@
+<section class="ContactSection">
+  <div class="CyberGrid"></div>
+
+  <div class="container">
+    <a routerLink="/home" class="BackBtn">&larr; {{ 'contact.back' | translate }}</a>
+    <div class="row justify-content-center">
+      <div class="col-12 text-center mb-5">
+        <div class="SectionTag">{{ 'contact.tag' | translate }}</div>
+        <h2 class="MainTitle">{{ 'contact.title' | translate }}<span class="Blink">_</span></h2>
+      </div>
+
+      <div class="col-lg-4 mb-5">
+        <div class="NodeContainer">
+          <h3 class="NodeTitle">{{ 'contact.networks' | translate }}</h3>
+          <div class="SocialNodes">
+            <a href="mailto:ivothaielvicencio@gmail.com" class="NodeItem Gmail">
+              <i class="bi bi-envelope-fill"></i>
+              <div class="NodeInfo">
+                <span>{{ 'contact.gmail' | translate }}</span>
+                <p>{{ 'contact.gmailDesc' | translate }}</p>
+              </div>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/ivo-vicencio-rosas-7aaa44211/"
+              target="_blank"
+              class="NodeItem Linkedin"
+            >
+              <i class="bi bi-linkedin"></i>
+              <div class="NodeInfo">
+                <span>{{ 'contact.linkedin' | translate }}</span>
+                <p>{{ 'contact.linkedinDesc' | translate }}</p>
+              </div>
+            </a>
+            <a href="https://github.com/ivovicencio" target="_blank" class="NodeItem Github">
+              <i class="bi bi-github"></i>
+              <div class="NodeInfo">
+                <span>{{ 'contact.github' | translate }}</span>
+                <p>{{ 'contact.githubDesc' | translate }}</p>
+              </div>
+            </a>
+            <a
+              href="https://www.instagram.com/ivothaiel/"
+              target="_blank"
+              class="NodeItem Instagram"
+            >
+              <i class="bi bi-instagram"></i>
+              <div class="NodeInfo">
+                <span>{{ 'contact.instagram' | translate }}</span>
+                <p>{{ 'contact.instagramDesc' | translate }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="MissionWindow">
+          <div class="WindowBorder"></div>
+          <div class="WindowHeader">{{ 'contact.mission' | translate }}</div>
+
+          <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="InputGroup">
+                  <label>{{ 'contact.nameLabel' | translate }}</label>
+                  <input
+                    type="text"
+                    name="name"
+                    [(ngModel)]="contactData.name"
+                    required
+                    placeholder="{{ 'contact.namePlaceholder' | translate }}"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="InputGroup">
+                  <label>{{ 'contact.emailLabel' | translate }}</label>
+                  <input
+                    type="email"
+                    name="email"
+                    [(ngModel)]="contactData.email"
+                    required
+                    placeholder="{{ 'contact.emailPlaceholder' | translate }}"
+                  />
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="InputGroup">
+                  <label>{{ 'contact.subjectLabel' | translate }}</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    [(ngModel)]="contactData.subject"
+                    required
+                    placeholder="{{ 'contact.subjectPlaceholder' | translate }}"
+                  />
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="InputGroup">
+                  <label>{{ 'contact.messageLabel' | translate }}</label>
+                  <textarea
+                    name="message"
+                    [(ngModel)]="contactData.message"
+                    rows="5"
+                    required
+                    placeholder="{{ 'contact.messagePlaceholder' | translate }}"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="col-12">
+                <button
+                  type="submit"
+                  class="SubmitBtn"
+                  [disabled]="!contactForm.form.valid || sendStatus === 'sending'"
+                >
+                  <span *ngIf="sendStatus === 'idle'">{{ 'contact.submit' | translate }}</span>
+                  <span *ngIf="sendStatus === 'sending'">{{ 'contact.sending' | translate }}</span>
+                  <span *ngIf="sendStatus === 'success'" class="TextAccent">{{
+                    'contact.success' | translate
+                  }}</span>
+                  <span *ngIf="sendStatus === 'error'" class="TextError"
+                    >{{ 'contact.error' | translate }} {{ errorMessage }}</span
+                  >
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

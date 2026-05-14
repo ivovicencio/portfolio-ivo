@@ -1,0 +1,1039 @@
+/* =========================================
+   1. ENTORNO Y GALAXIA 3D (BASE)
+   ========================================= */
+.HeroGalaxyContainer {
+  height: 100vh;
+  background-color: var(--bg-dark);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.NebulaSmoke {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: var(--accent-green);
+  filter: blur(250px);
+  opacity: 0.12;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.StarsBackground {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.08;
+  z-index: 0;
+}
+
+.SolarSystem {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  z-index: 10;
+}
+
+/* =========================================
+   2. NÚCLEO CENTRAL (TU FOTO)
+   ========================================= */
+.CentralCore {
+  position: absolute;
+  width: 380px;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translateZ(0);
+  filter: drop-shadow(0 0 40px rgba(74, 222, 128, 0.15));
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.CentralCore:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 60px rgba(0, 242, 255, 0.4)); /* Brillo azulado al hover */
+}
+
+.ImageMask {
+  width: 100%;
+  position: relative;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 75%,
+    rgba(0, 0, 0, 0.9) 88%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 75%,
+    rgba(0, 0, 0, 0.9) 88%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.ImageMask::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 10%;
+  width: 80%;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(0, 242, 255, 0.06), transparent);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.AvatarImage {
+  width: 100%;
+  height: auto;
+  animation: floating 8s ease-in-out infinite;
+}
+
+.TechBadge {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.BadgeText {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #00f2ff;
+  padding: 6px 28px;
+  border: 1px solid rgba(0, 242, 255, 0.3);
+  background: rgba(0, 20, 40, 0.7);
+  backdrop-filter: blur(4px);
+  text-shadow: 0 0 10px #00f2ff;
+  animation: badgePulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.BadgeBracketLeft,
+.BadgeBracketRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  font-weight: 300;
+  color: #00f2ff;
+  opacity: 0.5;
+  text-shadow: 0 0 8px #00f2ff;
+  animation: bracketFlicker 2s step-end infinite;
+}
+
+.BadgeBracketLeft {
+  left: 6px;
+}
+
+.BadgeBracketRight {
+  right: 6px;
+}
+
+.BadgeScanLine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.15), transparent);
+  animation: scanLine 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.BadgeArrow {
+  position: absolute;
+  bottom: -40px;
+  font-size: 0;
+  animation: arrowBounce 1.5s ease-in-out infinite;
+}
+
+.arrowLeft {
+  left: 10%;
+}
+
+.arrowRight {
+  right: 10%;
+  animation-delay: 0.4s;
+}
+
+.BadgeArrow::before {
+  content: '<<';
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #00f2ff;
+  letter-spacing: -4px;
+  text-shadow:
+    0 0 8px #00f2ff,
+    0 0 20px rgba(0, 242, 255, 0.4);
+  display: block;
+  transform: rotate(90deg);
+  line-height: 1;
+}
+
+.BadgeArrow::after {
+  content: '<<';
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #00f2ff;
+  letter-spacing: -4px;
+  text-shadow:
+    0 0 8px #00f2ff,
+    0 0 20px rgba(0, 242, 255, 0.4);
+  display: block;
+  transform: rotate(90deg);
+  margin-top: 4px;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.CentralCore:hover .BadgeText {
+  color: #fff;
+  border-color: #00f2ff;
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+  background: rgba(0, 40, 80, 0.8);
+}
+
+.CentralCore:hover .BadgeBracketLeft,
+.CentralCore:hover .BadgeBracketRight {
+  opacity: 1;
+  color: #fff;
+}
+
+.CoreGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 250px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.2;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* =========================================
+   3. ÓRBITA Y TECNOLOGÍAS
+   ========================================= */
+.OrbitalRing {
+  position: absolute;
+  width: 680px;
+  height: 680px;
+  border: 2px dashed rgba(74, 222, 128, 0.25);
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.PlanetaryIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -35px;
+  margin-left: -35px;
+  width: 70px;
+  height: 70px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.IconInner {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-surface);
+  border: 2px solid rgba(74, 222, 128, 0.4);
+  border-radius: 50%;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+.IconInner img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.PlanetaryIcon:hover .IconInner {
+  border-color: #ffcc00; /* Dorado para las habilidades */
+  box-shadow: 0 0 25px rgba(255, 204, 0, 0.6);
+  transform: scale(1.15);
+}
+
+.PlanetaryIcon.SelectedTech .IconInner {
+  border-color: #ffcc00;
+  background: rgba(255, 204, 0, 0.15);
+  box-shadow: 0 0 35px #ffcc00;
+  animation: techPulse 1.5s infinite;
+  transform: scale(1.2);
+}
+
+/* =========================================
+   4. TEXTOS DE FONDO
+   ========================================= */
+.HeroTextMinimal {
+  position: absolute;
+  bottom: 50px;
+  text-align: center;
+  width: 100%;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.TitleMinimal {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: 6px;
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.SubtitleMinimal {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  letter-spacing: 8px;
+  margin-top: 8px;
+}
+
+.LocationMinimal {
+  font-size: 0.7rem;
+  color: var(--accent-green);
+  letter-spacing: 5px;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+/* =========================================
+   5. OVERLAYS GENERALES (MODALES)
+   ========================================= */
+.StatusOverlay,
+.SkillCardOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 10, 20, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================
+   6. STATUS WINDOW (ESTILO SOLO LEVELING)
+   ========================================= */
+.StatusWindow {
+  background: rgba(0, 40, 80, 0.85); /* Fondo azul oscuro transparente */
+  border: 2px solid #00f2ff; /* Borde neón brillante */
+  width: 90%;
+  max-width: 450px;
+  padding: 30px;
+  box-shadow:
+    0 0 40px rgba(0, 242, 255, 0.3),
+    inset 0 0 20px rgba(0, 242, 255, 0.2);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  animation: statusAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.WindowHeader {
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #00f2ff;
+  border-bottom: 2px solid #00f2ff;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  letter-spacing: 5px;
+  text-shadow: 0 0 10px #00f2ff;
+}
+
+.InfoRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.Label {
+  color: #00f2ff;
+  font-weight: 700;
+}
+.Value {
+  font-weight: 800;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.StatsDivider {
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  background: rgba(0, 242, 255, 0.2);
+  margin: 30px 0 20px 0;
+  padding: 5px;
+  color: #00f2ff;
+  border-left: 3px solid #00f2ff;
+  border-right: 3px solid #00f2ff;
+}
+
+.SoftSkillsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.SkillBar p {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.Bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 5px 0 0 0;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.Fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00f2ff, #0077ff);
+  box-shadow: 0 0 15px #00f2ff;
+  transition: width 1s ease-out;
+}
+
+.OriginData {
+  font-size: 0.65rem;
+  text-align: center;
+  margin-top: 30px;
+  opacity: 0.7;
+  letter-spacing: 2px;
+}
+
+.StatusBtn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #00f2ff;
+  color: #00f2ff;
+  padding: 15px;
+  margin-top: 25px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.StatusBtn:hover {
+  background: #00f2ff;
+  color: #000;
+  box-shadow: 0 0 25px #00f2ff;
+}
+
+.CvButtons {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.CvButtons .StatusBtn {
+  flex: 1;
+  margin-top: 0;
+  font-size: 0.7rem;
+  padding: 12px 8px;
+}
+
+/* =========================================
+   7. SKILL CARD (CARTA DE HABILIDAD)
+   ========================================= */
+.SkillCard {
+  background: rgba(0, 20, 40, 0.9);
+  border: 2px solid #ffcc00; /* Borde dorado */
+  width: 320px;
+  padding: 30px 25px;
+  text-align: center;
+  box-shadow:
+    0 0 40px rgba(255, 204, 0, 0.3),
+    inset 0 0 15px rgba(255, 204, 0, 0.1);
+  animation: skillAppear 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.SkillHeader {
+  color: #ffcc00;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+.SkillIcon {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.SkillTitle {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+.SkillDesc {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.MasteryContainer {
+  font-size: 0.75rem;
+  color: #ffcc00;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.MasteryBar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: 8px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.MasteryBar .Fill {
+  background: #ffcc00;
+  box-shadow: 0 0 15px #ffcc00;
+}
+
+.CloseSkill {
+  background: transparent;
+  border: none;
+  color: #ffcc00;
+  margin-top: 25px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  cursor: pointer;
+  letter-spacing: 3px;
+  transition: 0.3s;
+}
+
+.CloseSkill:hover {
+  color: #fff;
+  text-shadow: 0 0 10px #ffcc00;
+}
+
+/* =========================================
+   8. ANIMACIONES (KEYFRAMES)
+   ========================================= */
+@keyframes floating {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes techPulse {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 204, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+  }
+}
+
+@keyframes badgePulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 5px rgba(0, 242, 255, 0.2),
+      inset 0 0 5px rgba(0, 242, 255, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(0, 242, 255, 0.4),
+      inset 0 0 15px rgba(0, 242, 255, 0.1);
+  }
+}
+
+@keyframes scanLine {
+  0% {
+    left: -60%;
+  }
+  100% {
+    left: 160%;
+  }
+}
+
+@keyframes bracketFlicker {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes arrowBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes statusAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes skillAppear {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ========== RESPONSIVO ========== */
+/* TABLET (768px - 991px) */
+@media (max-width: 991px) {
+  .HeroGalaxyContainer {
+    height: auto;
+    min-height: 100vh;
+    padding: 60px 0 100px;
+  }
+
+  .NebulaSmoke {
+    width: 500px;
+    height: 500px;
+    filter: blur(150px);
+  }
+
+  .StarsBackground {
+    background-size: 40px 40px;
+  }
+
+  .SolarSystem {
+    perspective: 800px;
+  }
+
+  .CentralCore {
+    width: 250px;
+  }
+
+  .OrbitalRing {
+    width: 450px;
+    height: 450px;
+  }
+
+  .PlanetaryIcon {
+    width: 55px;
+    height: 55px;
+    margin-top: -27px;
+    margin-left: -27px;
+  }
+
+  .IconInner {
+    padding: 10px;
+  }
+
+  .TechBadge {
+    top: -24px;
+  }
+
+  .BadgeText {
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    padding: 4px 20px;
+  }
+
+  .BadgeArrow {
+    bottom: -30px;
+  }
+
+  .BadgeArrow::before,
+  .BadgeArrow::after {
+    font-size: 1rem;
+  }
+
+  .HeroTextMinimal {
+    bottom: 20px;
+  }
+
+  .TitleMinimal {
+    font-size: 2rem;
+  }
+
+  .SubtitleMinimal {
+    font-size: 0.8rem;
+  }
+
+  .StatusWindow {
+    width: 95%;
+    padding: 25px;
+  }
+
+  .SkillCard {
+    width: 280px;
+    padding: 25px 20px;
+  }
+
+  .CvButtons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .CvButtons .StatusBtn {
+    font-size: 0.75rem;
+    padding: 14px;
+  }
+}
+
+/* MOBILE (480px - 767px) */
+@media (max-width: 767px) {
+  .HeroGalaxyContainer {
+    height: auto;
+    min-height: 100vh;
+    padding: 40px 0 80px;
+  }
+
+  .NebulaSmoke {
+    width: 350px;
+    height: 350px;
+    filter: blur(100px);
+  }
+
+  .StarsBackground {
+    background-size: 30px 30px;
+    opacity: 0.05;
+  }
+
+  .SolarSystem {
+    perspective: 600px;
+  }
+
+  .CentralCore {
+    width: 180px;
+  }
+
+  .TechBadge {
+    top: -20px;
+  }
+
+  .BadgeText {
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    padding: 4px 16px;
+  }
+
+  .BadgeArrow {
+    bottom: -24px;
+  }
+
+  .BadgeArrow::before,
+  .BadgeArrow::after {
+    font-size: 0.85rem;
+  }
+
+  .OrbitalRing {
+    width: 320px;
+    height: 320px;
+  }
+
+  .PlanetaryIcon {
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+  }
+
+  .IconInner {
+    padding: 8px;
+    border-width: 1.5px;
+  }
+
+  .HeroTextMinimal {
+    bottom: 20px;
+  }
+
+  .TitleMinimal {
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+  }
+
+  .SubtitleMinimal {
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+  }
+
+  .LocationMinimal {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    margin-top: 15px;
+  }
+
+  .StatusWindow {
+    width: 95%;
+    max-width: 100%;
+    padding: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .WindowHeader {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+
+  .InfoRow {
+    font-size: 0.75rem;
+    margin-bottom: 12px;
+  }
+
+  .StatsDivider {
+    font-size: 0.65rem;
+    margin: 20px 0 15px 0;
+  }
+
+  .SkillBar p {
+    font-size: 0.65rem;
+  }
+
+  .StatusBtn {
+    padding: 12px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin-top: 20px;
+  }
+
+  .CvButtons {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .CvButtons .StatusBtn {
+    font-size: 0.7rem;
+    padding: 12px;
+  }
+
+  .SkillCard {
+    width: 100%;
+    max-width: 320px;
+    padding: 20px 15px;
+    margin: 10px;
+  }
+
+  .SkillHeader {
+    font-size: 0.7rem;
+    margin-bottom: 20px;
+  }
+
+  .SkillIcon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .SkillTitle {
+    font-size: 1.4rem;
+  }
+
+  .SkillDesc {
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+  }
+
+  .MasteryContainer {
+    font-size: 0.7rem;
+  }
+
+  .MasteryBar {
+    height: 6px;
+    margin-top: 6px;
+  }
+
+  .CloseSkill {
+    font-size: 0.65rem;
+    margin-top: 20px;
+  }
+}
+
+/* CELULARES PEQUEÑOS (hasta 480px) */
+@media (max-width: 480px) {
+  .HeroGalaxyContainer {
+    padding: 30px 0 60px;
+  }
+
+  .NebulaSmoke {
+    width: 250px;
+    height: 250px;
+    filter: blur(80px);
+  }
+
+  .StarsBackground {
+    background-size: 20px 20px;
+    opacity: 0.03;
+  }
+
+  .SolarSystem {
+    perspective: 500px;
+  }
+
+  .CentralCore {
+    width: 140px;
+  }
+
+  .CoreGlow {
+    width: 150px;
+    height: 150px;
+    filter: blur(60px);
+  }
+
+  .TechBadge {
+    top: -16px;
+  }
+
+  .BadgeText {
+    font-size: 0.5rem;
+    letter-spacing: 1.5px;
+    padding: 3px 12px;
+  }
+
+  .BadgeArrow {
+    bottom: -18px;
+  }
+
+  .BadgeArrow::before,
+  .BadgeArrow::after {
+    font-size: 0.7rem;
+  }
+
+  .OrbitalRing {
+    width: 250px;
+    height: 250px;
+    border-width: 1.5px;
+  }
+
+  .PlanetaryIcon {
+    width: 45px;
+    height: 45px;
+    margin-top: -22px;
+    margin-left: -22px;
+  }
+
+  .IconInner {
+    padding: 6px;
+    border-width: 1px;
+  }
+
+  .HeroTextMinimal {
+    bottom: 10px;
+  }
+
+  .TitleMinimal {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+  }
+
+  .SubtitleMinimal {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+  }
+
+  .LocationMinimal {
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+  }
+
+  .StatusWindow {
+    padding: 15px;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .WindowHeader {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .InfoRow {
+    font-size: 0.7rem;
+    margin-bottom: 10px;
+  }
+
+  .SkillCard {
+    padding: 15px 12px;
+    margin: 8px;
+  }
+
+  .SkillIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .SkillTitle {
+    font-size: 1.2rem;
+  }
+
+  .SkillDesc {
+    font-size: 0.75rem;
+  }
+
+  .CvButtons .StatusBtn {
+    font-size: 0.65rem;
+    padding: 10px;
+  }
+}

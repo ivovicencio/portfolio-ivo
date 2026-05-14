@@ -1,0 +1,701 @@
+.ProjectsSection {
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.BackBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #00f2ff;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 8px 16px;
+  border: 1px solid rgba(0, 242, 255, 0.2);
+  background: rgba(0, 242, 255, 0.03);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 20px;
+}
+
+.BackBtn:hover {
+  background: rgba(0, 242, 255, 0.1);
+  border-color: #00f2ff;
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+  color: #fff;
+}
+
+.GridOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(74, 222, 128, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 222, 128, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+}
+
+.DisplayTitle {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: 10px;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.Subtitle {
+  color: var(--text-secondary);
+  letter-spacing: 4px;
+  font-size: 0.8rem;
+}
+
+.Blink {
+  animation: blinker 1s step-end infinite;
+  color: var(--accent-green);
+}
+
+/* --- BUSCADOR --- */
+.ControlsWrapper {
+  position: relative;
+  z-index: 10;
+}
+
+.SearchBox {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 20px;
+  background: rgba(11, 19, 23, 0.8);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 2px;
+  transition: border-color 0.3s;
+}
+
+.SearchBox:focus-within {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.2);
+}
+
+.Prefix {
+  color: var(--accent-green);
+  font-weight: bold;
+  margin-right: 15px;
+  animation: blinker 1s infinite;
+}
+
+.CyberInput {
+  background: transparent;
+  border: none;
+  color: #fff;
+  width: 100%;
+  font-size: 0.85rem;
+  outline: none;
+  letter-spacing: 1px;
+}
+
+.CyberInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* --- FILTROS --- */
+.FilterContainer button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  padding: 10px 25px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.FilterContainer button.Active,
+.FilterContainer button:hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.05);
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
+}
+
+/* --- TARJETAS --- */
+.ProjectCard {
+  background: rgba(11, 19, 23, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  height: 100%;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.ProjectCard:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent-green);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(74, 222, 128, 0.1);
+}
+
+.ProjectCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 20px 20px 0;
+  border-color: transparent var(--bg-dark) transparent transparent;
+}
+
+.CategoryTag {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--accent-green);
+  font-weight: 800;
+}
+
+.StatusTag {
+  float: right;
+  font-size: 0.6rem;
+  background: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.ProjectTitle {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 20px 0 10px 0;
+  color: #fff;
+}
+
+.ProjectDesc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.TechStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.TechIcon {
+  font-size: 0.65rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 4px 10px;
+  border-radius: 3px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.CardFooter {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.DecorativeBar {
+  height: 2px;
+  width: 30px;
+  background: var(--accent-green);
+  transition: width 0.4s ease;
+}
+
+.ProjectCard:hover .DecorativeBar {
+  width: 100px;
+}
+
+.ViewButton {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ProjectCard:hover .ViewButton {
+  color: var(--accent-green);
+}
+
+.ProjectCard.InProgress {
+  border-left: 3px solid #ffc107;
+}
+
+/* --- MODAL FLOTANTE --- */
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.ModalContent {
+  background: #0b1317;
+  border: 1px solid var(--accent-green);
+  width: 100%;
+  max-width: 650px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 0 50px rgba(74, 222, 128, 0.2);
+  animation: modalIn 0.3s ease-out;
+}
+
+.ModalScanner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-green);
+  box-shadow: 0 0 10px var(--accent-green);
+  animation: scanning 2.5s linear infinite;
+  opacity: 0.4;
+}
+
+.CloseModal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.CloseModal:hover {
+  color: var(--accent-green);
+}
+
+.ModalTitle {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 10px 0 25px 0;
+}
+
+.HistoryTitle {
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.HistoryText {
+  color: #d1d5db;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.ModalTech {
+  border-color: rgba(74, 222, 128, 0.3);
+  color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.05);
+}
+
+.LinksGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.LinkBtn {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.LinkBtn:hover {
+  border-color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.1);
+  color: var(--accent-green);
+}
+
+.LinkBtn.Deploy {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.LinkBtn.Deploy:hover {
+  background: var(--accent-green);
+  color: #000;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes scanning {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+/* ========== RESPONSIVO ========== */
+/* TABLET (768px - 991px) */
+@media (max-width: 991px) {
+  .ProjectsSection {
+    padding: 80px 0;
+  }
+
+  .BackBtn {
+    font-size: 0.7rem;
+    padding: 6px 14px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .DisplayTitle {
+    font-size: 2.5rem;
+    letter-spacing: 8px;
+  }
+
+  .Subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+  }
+
+  .SearchBox {
+    max-width: 100%;
+  }
+
+  .CyberInput {
+    font-size: 0.8rem;
+  }
+
+  .FilterContainer button {
+    padding: 8px 15px;
+    font-size: 0.7rem;
+  }
+
+  .ProjectCard {
+    padding: 25px;
+  }
+
+  .ProjectTitle {
+    font-size: 1.2rem;
+    margin: 15px 0 8px 0;
+  }
+
+  .ProjectDesc {
+    font-size: 0.85rem;
+  }
+
+  .TechIcon {
+    font-size: 0.6rem;
+    padding: 3px 8px;
+  }
+
+  .ModalContent {
+    max-width: 90%;
+    padding: 30px;
+  }
+
+  .ModalTitle {
+    font-size: 1.8rem;
+  }
+
+  .HistoryText {
+    font-size: 0.9rem;
+  }
+}
+
+/* MOBILE (480px - 767px) */
+@media (max-width: 767px) {
+  .ProjectsSection {
+    padding: 60px 20px;
+  }
+
+  .BackBtn {
+    font-size: 0.65rem;
+    padding: 6px 12px;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+  }
+
+  .GridOverlay {
+    background-size: 30px 30px;
+  }
+
+  .DisplayTitle {
+    font-size: 1.8rem;
+    letter-spacing: 6px;
+  }
+
+  .Subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+
+  .ControlsWrapper {
+    margin-bottom: 30px;
+  }
+
+  .SearchBox {
+    max-width: 100%;
+    padding: 8px 15px;
+    margin-bottom: 15px;
+  }
+
+  .Prefix {
+    margin-right: 10px;
+    font-size: 0.85rem;
+  }
+
+  .CyberInput {
+    font-size: 0.75rem;
+  }
+
+  .FilterContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+  }
+
+  .FilterContainer button {
+    padding: 8px 12px;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+  }
+
+  .ProjectCard {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .CategoryTag {
+    font-size: 0.6rem;
+    letter-spacing: 1.5px;
+  }
+
+  .StatusTag {
+    font-size: 0.55rem;
+    padding: 2px 6px;
+  }
+
+  .ProjectTitle {
+    font-size: 1.1rem;
+    margin: 12px 0 6px 0;
+  }
+
+  .ProjectDesc {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .TechStack {
+    gap: 6px;
+    margin-top: 15px;
+  }
+
+  .TechIcon {
+    font-size: 0.55rem;
+    padding: 3px 7px;
+  }
+
+  .CardFooter {
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .ViewButton {
+    font-size: 0.7rem;
+  }
+
+  .ModalOverlay {
+    padding: 15px;
+  }
+
+  .ModalContent {
+    max-width: 100%;
+    padding: 25px;
+  }
+
+  .CloseModal {
+    font-size: 1.2rem;
+    top: 10px;
+    right: 15px;
+  }
+
+  .ModalTitle {
+    font-size: 1.5rem;
+    margin: 5px 0 20px 0;
+  }
+
+  .HistoryTitle {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+  }
+
+  .HistoryText {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .LinksGrid {
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .LinkBtn {
+    padding: 8px 15px;
+    font-size: 0.65rem;
+  }
+}
+
+/* CELULARES PEQUEÑOS (hasta 480px) */
+@media (max-width: 480px) {
+  .ProjectsSection {
+    padding: 40px 15px;
+  }
+
+  .GridOverlay {
+    background-size: 20px 20px;
+  }
+
+  .DisplayTitle {
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+  }
+
+  .Subtitle {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+  }
+
+  .SearchBox {
+    padding: 6px 12px;
+    margin-bottom: 12px;
+  }
+
+  .Prefix {
+    margin-right: 8px;
+    font-size: 0.75rem;
+  }
+
+  .CyberInput {
+    font-size: 0.7rem;
+  }
+
+  .FilterContainer button {
+    padding: 6px 10px;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+  }
+
+  .ProjectCard {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .ProjectCard::before {
+    border-width: 0 15px 15px 0;
+  }
+
+  .CategoryTag {
+    font-size: 0.55rem;
+  }
+
+  .ProjectTitle {
+    font-size: 1rem;
+    margin: 10px 0 5px 0;
+  }
+
+  .ProjectDesc {
+    font-size: 0.75rem;
+  }
+
+  .TechIcon {
+    font-size: 0.5rem;
+    padding: 2px 6px;
+  }
+
+  .CardFooter {
+    margin-top: 15px;
+    flex-direction: column;
+  }
+
+  .DecorativeBar {
+    width: 20px;
+  }
+
+  .ModalContent {
+    padding: 20px;
+  }
+
+  .ModalTitle {
+    font-size: 1.3rem;
+    margin: 0 0 18px 0;
+  }
+
+  .HistoryText {
+    font-size: 0.8rem;
+  }
+
+  .LinkBtn {
+    padding: 7px 12px;
+    font-size: 0.6rem;
+    flex: 1;
+  }
+}

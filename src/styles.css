@@ -1,1 +1,81 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-dark: #070c0f;
+  --bg-surface: #0b1317;
+  --accent-green: #4ade80;
+  --text-primary: #ffffff;
+  --text-secondary: #a0aec0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--accent-green); border-radius: 10px; }
+
+.TextAccent { color: var(--accent-green) !important; }
+
+.BtnNeon {
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  padding: 8px 20px;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.BtnNeon:hover {
+  background: var(--accent-green);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px var(--accent-green);
+}
+
+/* ========== RESPONSIVO GLOBAL ========== */
+/* TABLET (768px - 991px) */
+@media (max-width: 991px) {
+  body {
+    font-size: 14px;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+}
+
+/* MOBILE (480px - 767px) */
+@media (max-width: 767px) {
+  body {
+    font-size: 13px;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+
+  .container-fluid, .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* CELULARES PEQUEÑOS (hasta 480px) */
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+
+  ::-webkit-scrollbar { width: 3px; }
+
+  .container-fluid, .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .BtnNeon {
+    padding: 6px 15px;
+    font-size: 0.8rem;
+  }
+}

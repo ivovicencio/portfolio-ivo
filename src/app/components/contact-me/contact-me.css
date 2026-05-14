@@ -1,0 +1,458 @@
+.ContactSection {
+  min-height: 100vh;
+  background-color: #070c0f;
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+
+.BackBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #00f2ff;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 8px 16px;
+  border: 1px solid rgba(0, 242, 255, 0.2);
+  background: rgba(0, 242, 255, 0.03);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 20px;
+}
+
+.BackBtn:hover {
+  background: rgba(0, 242, 255, 0.1);
+  border-color: #00f2ff;
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+  color: #fff;
+}
+
+.CyberGrid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 0;
+}
+
+.SectionTag {
+  color: #00f2ff;
+  font-size: 0.7rem;
+  letter-spacing: 5px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.MainTitle {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 12px;
+  text-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+}
+
+.Blink {
+  animation: blinker 1s step-end infinite;
+  color: var(--accent-green);
+}
+
+/* --- SOCIAL NODES (Izquierda) --- */
+.NodeContainer {
+  background: rgba(16, 24, 28, 0.6);
+  border-left: 4px solid var(--accent-green);
+  padding: 30px;
+  backdrop-filter: blur(10px);
+}
+
+.NodeTitle {
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.NodeItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #fff;
+}
+
+.NodeItem i {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.NodeInfo span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.NodeInfo p {
+  margin: 0;
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+/* Colores específicos de Nodo */
+.NodeItem:hover {
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.08);
+}
+.Gmail:hover {
+  border-color: #ea4335;
+  box-shadow: 0 0 15px rgba(234, 67, 53, 0.2);
+}
+.Linkedin:hover {
+  border-color: #0077b5;
+  box-shadow: 0 0 15px rgba(0, 119, 181, 0.2);
+}
+.Github:hover {
+  border-color: #fff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+.Instagram:hover {
+  border-color: #e4405f;
+  box-shadow: 0 0 15px rgba(228, 64, 95, 0.2);
+}
+
+/* --- VENTANA DE MISIÓN (Derecha) --- */
+.MissionWindow {
+  background: rgba(0, 20, 40, 0.8);
+  border: 2px solid #00f2ff; /* Azul Solo Leveling */
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+}
+
+.WindowHeader {
+  position: absolute;
+  top: -15px;
+  left: 30px;
+  background: #00f2ff;
+  color: #000;
+  padding: 2px 20px;
+  font-weight: 900;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+}
+
+.InputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.InputGroup label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #00f2ff;
+}
+
+.InputGroup input,
+.InputGroup textarea {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 242, 255, 0.3);
+  padding: 12px;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.InputGroup input:focus,
+.InputGroup textarea:focus {
+  border-color: #ffcc00; /* Amarillo de Alerta */
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+}
+
+.SubmitBtn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #ffcc00;
+  color: #ffcc00;
+  padding: 15px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.SubmitBtn:hover:not(:disabled) {
+  background: #ffcc00;
+  color: #000;
+  box-shadow: 0 0 20px #ffcc00;
+}
+
+.SubmitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
+}
+
+.TextError {
+  color: #ff4444 !important;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ========== RESPONSIVO ========== */
+/* TABLET (entre 768px y 991px) */
+@media (max-width: 991px) {
+  .ContactSection {
+    padding: 80px 0;
+  }
+
+  .BackBtn {
+    font-size: 0.7rem;
+    padding: 6px 14px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .MainTitle {
+    font-size: 2.2rem;
+    letter-spacing: 8px;
+  }
+
+  .SectionTag {
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+  }
+
+  .MissionWindow {
+    margin-top: 30px;
+    padding: 25px;
+    border: 2px solid #00f2ff;
+  }
+
+  .NodeContainer {
+    margin-bottom: 30px;
+  }
+
+  .WindowHeader {
+    font-size: 0.7rem;
+    padding: 2px 15px;
+  }
+
+  .InputGroup input,
+  .InputGroup textarea {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+
+  .SubmitBtn {
+    padding: 12px;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+  }
+}
+
+/* MOBILE (hasta 767px) */
+@media (max-width: 767px) {
+  .ContactSection {
+    padding: 60px 20px;
+    min-height: auto;
+  }
+
+  .BackBtn {
+    font-size: 0.65rem;
+    padding: 6px 12px;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+  }
+
+  .CyberGrid {
+    background-size: 30px 30px;
+  }
+
+  .MainTitle {
+    font-size: 1.6rem;
+    letter-spacing: 6px;
+  }
+
+  .SectionTag {
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .row {
+    gap: 20px !important;
+  }
+
+  /* NODOS SOCIALES */
+  .NodeContainer {
+    background: rgba(16, 24, 28, 0.6);
+    border-left: 3px solid var(--accent-green);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .NodeTitle {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+  }
+
+  .NodeItem {
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .NodeItem i {
+    font-size: 1.2rem;
+  }
+
+  .NodeInfo span {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+  }
+
+  .NodeInfo p {
+    font-size: 0.6rem;
+  }
+
+  /* VENTANA DE FORMULARIO */
+  .MissionWindow {
+    background: rgba(0, 20, 40, 0.8);
+    border: 2px solid #00f2ff;
+    padding: 20px;
+    margin-top: 0;
+  }
+
+  .WindowBorder {
+    display: none;
+  }
+
+  .WindowHeader {
+    top: -12px;
+    left: 20px;
+    font-size: 0.65rem;
+    padding: 2px 15px;
+    letter-spacing: 2px;
+  }
+
+  .InputGroup {
+    gap: 6px;
+  }
+
+  .InputGroup label {
+    font-size: 0.6rem;
+    letter-spacing: 1.5px;
+  }
+
+  .InputGroup input,
+  .InputGroup textarea {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    padding: 10px;
+    color: #fff;
+    font-size: 0.8rem;
+    outline: none;
+    transition: 0.3s;
+  }
+
+  .InputGroup textarea {
+    rows: 4 !important;
+  }
+
+  .SubmitBtn {
+    width: 100%;
+    padding: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: 0.7rem;
+    margin-top: 8px;
+  }
+}
+
+/* CELULARES PEQUEÑOS (hasta 480px) */
+@media (max-width: 480px) {
+  .ContactSection {
+    padding: 40px 15px;
+  }
+
+  .MainTitle {
+    font-size: 1.3rem;
+    letter-spacing: 4px;
+  }
+
+  .SectionTag {
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+  }
+
+  .NodeContainer {
+    padding: 15px;
+    border-left: 2px solid var(--accent-green);
+  }
+
+  .NodeTitle {
+    font-size: 0.65rem;
+  }
+
+  .NodeItem {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .NodeItem i {
+    font-size: 1rem;
+  }
+
+  .MissionWindow {
+    padding: 15px;
+  }
+
+  .WindowHeader {
+    font-size: 0.6rem;
+    left: 15px;
+  }
+
+  .InputGroup label {
+    font-size: 0.55rem;
+  }
+
+  .InputGroup input,
+  .InputGroup textarea {
+    padding: 8px;
+    font-size: 0.75rem;
+  }
+
+  .SubmitBtn {
+    padding: 10px;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+  }
+}

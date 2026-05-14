@@ -1,0 +1,106 @@
+<section class="ProjectsSection">
+  <div class="GridOverlay"></div>
+
+  <div class="container">
+    <a routerLink="/home" class="BackBtn">&larr; {{ 'projects.back' | translate }}</a>
+    <div class="SectionHeader text-center mb-5">
+      <h2 class="DisplayTitle">{{ 'projects.title' | translate }}<span class="Blink">_</span></h2>
+      <p class="Subtitle">{{ 'projects.subtitle' | translate }}</p>
+    </div>
+
+    <div class="ControlsWrapper mb-5 d-flex flex-column align-items-center gap-4">
+      <div class="FilterContainer d-flex justify-content-center flex-wrap gap-3">
+        <button (click)="setFilter('all')" [class.Active]="activeFilter === 'all'">
+          {{ 'projects.all' | translate }}
+        </button>
+        <button (click)="setFilter('fullstack')" [class.Active]="activeFilter === 'fullstack'">
+          {{ 'projects.fullstack' | translate }}
+        </button>
+        <button (click)="setFilter('frontend')" [class.Active]="activeFilter === 'frontend'">
+          {{ 'projects.frontend' | translate }}
+        </button>
+        <button (click)="setFilter('backend')" [class.Active]="activeFilter === 'backend'">
+          {{ 'projects.backend' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6" *ngFor="let p of filteredProjects">
+        <div class="ProjectCard" [class.InProgress]="p.status === 'in-progress'">
+          <div class="CardHeader">
+            <span class="CategoryTag">{{ p.category | uppercase }}</span>
+            <span class="StatusTag" *ngIf="p.status === 'in-progress'">{{
+              'projects.inProgress' | translate
+            }}</span>
+          </div>
+
+          <div class="CardBody">
+            <h3 class="ProjectTitle">{{ p.title }}</h3>
+            <p class="ProjectDesc">{{ p.description }}</p>
+
+            <div class="TechStack">
+              <span *ngFor="let t of p.tech" class="TechIcon">{{ t }}</span>
+            </div>
+          </div>
+
+          <div class="CardFooter">
+            <div class="DecorativeBar"></div>
+            <button class="ViewButton" (click)="openModal(p)">
+              {{ 'projects.details' | translate }} <i class="bi bi-arrow-up-right-square ms-1"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ModalOverlay" *ngIf="isModalOpen" (click)="closeModal()">
+    <div class="ModalContent" (click)="$event.stopPropagation()">
+      <div class="ModalScanner"></div>
+
+      <button class="CloseModal" (click)="closeModal()"><i class="bi bi-x-lg"></i></button>
+
+      <div class="ModalBody" *ngIf="selectedProject">
+        <span class="CategoryTag">DATA // {{ selectedProject.category | uppercase }}</span>
+        <h2 class="ModalTitle">{{ selectedProject.title }}</h2>
+
+        <div class="HistoryBox mb-4">
+          <h4 class="HistoryTitle">{{ 'projects.context' | translate }}</h4>
+          <p class="HistoryText">{{ selectedProject.history }}</p>
+        </div>
+
+        <div class="TechBox mb-4">
+          <h4 class="HistoryTitle">{{ 'projects.stack' | translate }}</h4>
+          <div class="TechStack">
+            <span *ngFor="let t of selectedProject.tech" class="TechIcon ModalTech">{{ t }}</span>
+          </div>
+        </div>
+
+        <div class="LinksGrid">
+          <a
+            *ngIf="selectedProject.repoFront"
+            [href]="selectedProject.repoFront"
+            target="_blank"
+            class="LinkBtn"
+            ><i class="bi bi-github"></i> {{ 'projects.repoFront' | translate }}</a
+          >
+          <a
+            *ngIf="selectedProject.repoBack"
+            [href]="selectedProject.repoBack"
+            target="_blank"
+            class="LinkBtn"
+            ><i class="bi bi-github"></i> {{ 'projects.repoBack' | translate }}</a
+          >
+          <a
+            *ngIf="selectedProject.deployUrl"
+            [href]="selectedProject.deployUrl"
+            target="_blank"
+            class="LinkBtn Deploy"
+            ><i class="bi bi-globe"></i> {{ 'projects.deploy' | translate }}</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
