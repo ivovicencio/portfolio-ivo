@@ -42,8 +42,6 @@
           'deg)'
         "
         (click)="selectTech(i); $event.stopPropagation()"
-        (mousedown)="$event.stopPropagation()"
-        (touchstart)="$event.stopPropagation()"
       >
         <div class="IconInner">
           <img [src]="tech.logo" [alt]="tech.name" />

@@ -29,8 +29,12 @@ export class HomeComponent {
   isMomentuming = false;
   dragStartX = 0;
   dragStartRotation = 0;
+  dragTarget = 0;
   momentumVelocity = 0;
   momentumRaf: number | null = null;
+  animRaf: number | null = null;
+  hasDragged = false;
+  dragThreshold = 5;
 
   constructor() {
     this.updateOrbitRadius();
@@ -59,62 +63,89 @@ export class HomeComponent {
       cancelAnimationFrame(this.momentumRaf);
       this.momentumRaf = null;
     }
+    if (this.animRaf !== null) {
+      cancelAnimationFrame(this.animRaf);
+      this.animRaf = null;
+    }
     this.isGrabbing = true;
     this.isMomentuming = false;
     this.momentumVelocity = 0;
+    this.hasDragged = false;
     const clientX = 'touches' in event ? event.touches[0].clientX : event.clientX;
     this.dragStartX = clientX;
     this.dragStartRotation = this.systemRotation;
+    this.dragTarget = this.systemRotation;
+    this.startLoop();
   }
 
   @HostListener('document:mousemove', ['$event'])
   onMouseDrag(event: MouseEvent) {
     if (!this.isGrabbing) return;
-    const prev = this.systemRotation;
-    this.systemRotation = this.dragStartRotation - (event.clientX - this.dragStartX) * 0.5;
-    this.momentumVelocity = this.systemRotation - prev;
+    const deltaX = event.clientX - this.dragStartX;
+    if (!this.hasDragged && Math.abs(deltaX) > this.dragThreshold) {
+      this.hasDragged = true;
+    }
+    this.dragTarget = this.dragStartRotation - deltaX * 0.4;
   }
 
   @HostListener('document:mouseup')
   endMouseDrag() {
     if (!this.isGrabbing) return;
     this.isGrabbing = false;
-    this.startMomentum();
+    if (Math.abs(this.momentumVelocity) < 0.15) {
+      if (this.momentumRaf !== null) {
+        cancelAnimationFrame(this.momentumRaf);
+        this.momentumRaf = null;
+      }
+      return;
+    }
+    this.isMomentuming = true;
   }
 
   @HostListener('document:touchmove', ['$event'])
   onTouchDrag(event: TouchEvent) {
     if (!this.isGrabbing) return;
-    const prev = this.systemRotation;
-    this.systemRotation =
-      this.dragStartRotation - (event.touches[0].clientX - this.dragStartX) * 0.5;
-    this.momentumVelocity = this.systemRotation - prev;
+    const deltaX = event.touches[0].clientX - this.dragStartX;
+    if (!this.hasDragged && Math.abs(deltaX) > this.dragThreshold) {
+      this.hasDragged = true;
+    }
+    this.dragTarget = this.dragStartRotation - deltaX * 0.4;
   }
 
   @HostListener('document:touchend')
   endTouchDrag() {
     if (!this.isGrabbing) return;
     this.isGrabbing = false;
-    this.startMomentum();
+    if (Math.abs(this.momentumVelocity) < 0.15) {
+      if (this.momentumRaf !== null) {
+        cancelAnimationFrame(this.momentumRaf);
+        this.momentumRaf = null;
+      }
+      return;
+    }
+    this.isMomentuming = true;
   }
 
-  private startMomentum() {
-    const absV = Math.abs(this.momentumVelocity);
-    if (absV < 0.3) return;
-
-    this.isMomentuming = true;
-
+  private startLoop() {
     const step = () => {
-      this.systemRotation += this.momentumVelocity;
-      this.momentumVelocity *= 0.97;
-      if (Math.abs(this.momentumVelocity) > 0.05) {
+      if (this.isGrabbing) {
+        const diff = this.dragTarget - this.systemRotation;
+        this.systemRotation += diff * 0.1;
+        this.momentumVelocity = diff * 0.1;
         this.momentumRaf = requestAnimationFrame(step);
+      } else if (this.isMomentuming) {
+        this.systemRotation += this.momentumVelocity;
+        this.momentumVelocity *= 0.992;
+        if (Math.abs(this.momentumVelocity) > 0.05) {
+          this.momentumRaf = requestAnimationFrame(step);
+        } else {
+          this.isMomentuming = false;
+          this.momentumRaf = null;
+        }
       } else {
-        this.isMomentuming = false;
         this.momentumRaf = null;
       }
     };
-
     this.momentumRaf = requestAnimationFrame(step);
   }
 
@@ -171,16 +202,51 @@ export class HomeComponent {
   ];
 
   selectTech(index: number) {
+    if (this.hasDragged) return;
+
+    if (this.momentumRaf !== null) {
+      cancelAnimationFrame(this.momentumRaf);
+      this.momentumRaf = null;
+      this.isMomentuming = false;
+    }
+    if (this.animRaf !== null) {
+      cancelAnimationFrame(this.animRaf);
+      this.animRaf = null;
+    }
+
     this.selectedTechIndex = index;
     this.selectedTech = this.technologies[index];
-    this.isSkillOpen = true; // Abre la carta al tocar
+    this.isSkillOpen = true;
 
     let targetRotation = 90 - this.selectedTech.angle;
     const currentMod = this.systemRotation % 360;
     const diff = targetRotation - currentMod;
     if (diff > 180) targetRotation -= 360;
     else if (diff < -180) targetRotation += 360;
-    this.systemRotation += targetRotation - currentMod;
+
+    this.animateRotation(this.systemRotation + (targetRotation - currentMod));
+  }
+
+  private animateRotation(target: number) {
+    const start = this.systemRotation;
+    const totalDiff = target - start;
+    const duration = 700;
+    const startTime = performance.now();
+
+    const step = (now: number) => {
+      const elapsed = now - startTime;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      this.systemRotation = start + totalDiff * eased;
+
+      if (t < 1) {
+        this.animRaf = requestAnimationFrame(step);
+      } else {
+        this.animRaf = null;
+      }
+    };
+
+    this.animRaf = requestAnimationFrame(step);
   }
 
   toggleProfile() {

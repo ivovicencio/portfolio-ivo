@@ -155,94 +155,344 @@
   top: 7px;
 }
 
+/* =========================================
+   MOBILE NAV - Jarvis / Solo Leveling / Cyberpunk
+   ========================================= */
+.MobileNav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9990;
+}
+
+/* Scan line animada en el borde superior */
+.MobileNav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.6), transparent);
+  animation: navScan 3s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.MobileNavBar {
+  display: flex;
+  align-items: center;
+  padding: 28px 20px 20px;
+  background: rgba(7, 12, 15, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: none;
+}
+
+/* --- Brand con glow --- */
+.MobileBrand {
+  flex: 1;
+  text-align: center;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 4px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  text-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+  line-height: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.BrandLight {
+  color: #00f2ff;
+  text-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+}
+
+/* --- Botón menú holográfico --- */
+.MobileMenuBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 242, 255, 0.04);
+  border: 1px solid rgba(0, 242, 255, 0.12);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.MobileMenuBtn:hover {
+  background: rgba(0, 242, 255, 0.08);
+  border-color: rgba(0, 242, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+}
+
+.MenuBtnIcon {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 14px;
+}
+
+.MenuBtnLine {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: #00f2ff;
+  box-shadow: 0 0 6px rgba(0, 242, 255, 0.4);
+  border-radius: 1px;
+}
+
+/* --- Botón idioma sutil --- */
+.MobileLangBtn {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(0, 242, 255, 0.04);
+  border: 1px solid rgba(0, 242, 255, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 8px 10px;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.MobileLangBtn:hover {
+  background: rgba(0, 242, 255, 0.08);
+  border-color: rgba(0, 242, 255, 0.25);
+  color: #fff;
+}
+
+.MobileLangBtn .Active {
+  color: #00f2ff;
+  text-shadow: 0 0 8px #00f2ff;
+}
+
+.LangSlash {
+  color: rgba(255, 255, 255, 0.12);
+  font-weight: 300;
+}
+
+/* =========================================
+   OVERLAY - menú full-screen
+   ========================================= */
+.MobileMenuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 4, 10, 0.92);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: menuFadeIn 0.4s ease;
+}
+
+.MobileMenuContent {
+  text-align: center;
+  padding: 60px 30px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  border: 1px solid rgba(0, 242, 255, 0.06);
+  border-radius: 4px;
+  background: rgba(0, 8, 16, 0.3);
+}
+
+.MenuOverlayGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 242, 255, 0.04) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.MenuSysHeader {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: rgba(0, 242, 255, 0.3);
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
+}
+
+.MobileCloseBtn {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 242, 255, 0.04);
+  border: 1px solid rgba(0, 242, 255, 0.12);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.MobileCloseBtn:hover {
+  background: rgba(0, 242, 255, 0.08);
+  border-color: rgba(0, 242, 255, 0.3);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+}
+
+.CloseLine {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: #00f2ff;
+  position: absolute;
+  box-shadow: 0 0 6px rgba(0, 242, 255, 0.4);
+}
+
+.CloseLine:first-child {
+  transform: rotate(45deg);
+}
+
+.CloseLine:last-child {
+  transform: rotate(-45deg);
+}
+
+.MobileMenuLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 40px;
+}
+
+.MobileMenuLink {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  padding: 18px 0;
+  transition: all 0.3s ease;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.MobileMenuLink::before {
+  content: '[';
+  position: absolute;
+  left: -8px;
+  opacity: 0;
+  color: #00f2ff;
+  transition: all 0.3s ease;
+}
+
+.MobileMenuLink::after {
+  content: ']';
+  position: absolute;
+  right: -8px;
+  opacity: 0;
+  color: #00f2ff;
+  transition: all 0.3s ease;
+}
+
+.MobileMenuLink:hover::before,
+.MobileLinkActive::before {
+  opacity: 0.5;
+  left: 4px;
+}
+
+.MobileMenuLink:hover::after,
+.MobileLinkActive::after {
+  opacity: 0.5;
+  right: 4px;
+}
+
+.MobileMenuLink:hover,
+.MobileLinkActive {
+  color: #fff !important;
+  text-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+  letter-spacing: 12px;
+}
+
+.MobileContactLink:hover,
+.MobileLinkActive.MobileContactLink {
+  color: var(--accent-green) !important;
+  text-shadow: 0 0 30px rgba(74, 222, 128, 0.4);
+}
+
+.MobileContactLink:hover::before,
+.MobileLinkActive.MobileContactLink::before {
+  color: var(--accent-green);
+}
+
+.MobileContactLink:hover::after,
+.MobileLinkActive.MobileContactLink::after {
+  color: var(--accent-green);
+}
+
+.MobileMenuFooter {
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 242, 255, 0.05);
+}
+
+.MenuFooterLang {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.MenuFooterLang span {
+  transition: all 0.3s ease;
+}
+
+.MenuFooterLang span.Active {
+  color: #00f2ff;
+  text-shadow: 0 0 10px #00f2ff;
+}
+
+.MenuFooterLang:hover {
+  color: #fff;
+  letter-spacing: 6px;
+}
+
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(30px);
+  }
+}
+
+@keyframes navScan {
+  0% { left: -60%; }
+  100% { left: 160%; }
+}
+
 /* ========== RESPONSIVO ========== */
 @media (max-width: 991px) {
   .NavbarGlass {
-    padding: 14px 0;
-  }
-
-  .Brand {
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-  }
-
-  .NavWrapper {
-    gap: 0;
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(0, 242, 255, 0.1);
-    width: 100%;
-  }
-
-  .NavCustom {
-    font-size: 0.85rem;
-    padding: 12px 0;
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  }
-
-  .NavCustom::after {
-    display: none;
-  }
-
-  .NavCustom:hover {
-    color: #00f2ff;
-    background: rgba(0, 242, 255, 0.03);
-  }
-
-  .NavContactBtn {
-    margin-top: 12px;
-    width: 100%;
-    text-align: center;
-    padding: 12px;
-  }
-}
-
-@media (max-width: 767px) {
-  .NavbarGlass {
-    padding: 12px 0;
-  }
-
-  .Brand {
-    font-size: 1.1rem;
-    letter-spacing: 1.5px;
-  }
-
-  .NavCustom {
-    font-size: 0.8rem;
-    padding: 10px 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .NavbarGlass {
-    padding: 10px 0;
-  }
-
-  .Brand {
-    font-size: 1rem;
-    letter-spacing: 1px;
-  }
-
-  .NavCustom {
-    font-size: 0.75rem;
-    padding: 8px 0;
-  }
-
-  .ToggleBtn {
-    padding: 6px 10px;
-  }
-
-  .ToggleIcon {
-    width: 18px;
-  }
-
-  .ToggleIcon::before {
-    top: -6px;
-  }
-
-  .ToggleIcon::after {
-    top: 6px;
+    display: none !important;
   }
 }
