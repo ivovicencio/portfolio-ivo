@@ -64,7 +64,7 @@ export class ProjectsComponent {
       category: 'backend',
       tech: ['Java', 'Spring Boot', 'JWT'],
       status: 'completed',
-      repoBack: 'https://gitlab.com/ivothaiel/poo2025-grupo15',
+      repoBack: 'https://gitlab.com/ivothaiel/poo2025-grupo15'
     },
     {
       key: 'soysi',
@@ -82,6 +82,13 @@ export class ProjectsComponent {
       repoFront: 'https://github.com/ivothaiel/OlimpoGym-TP1',
       deployUrl: 'https://ivothaiel.github.io/OlimpoGym-TP1/',
     },
+    {
+      key: 'EcommerceTech',
+      category: 'frontend',
+      tech: ['React', 'JavaScript', 'Bootstrap'],
+      status: 'completed',
+      repoFront: 'https://github.com/Alexander-Ajalla/PV-TP-Integrador-Grupo09'
+    }
   ];
 
   constructor(private ts: TranslationService) {
